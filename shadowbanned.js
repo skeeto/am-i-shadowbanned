@@ -85,16 +85,24 @@ window.addEventListener('load', function() {
     var user = document.getElementById('user');
     var output = new Output(document.getElementById('output'));
 
-    check.addEventListener('submit', function(event) {
-        event.preventDefault();
+    function submit(event) {
+        if (event) event.preventDefault();
+        location.hash = user.value;
         output.print('Checking ' +  user.value + ' ...');
         new Checker(user.value, function(result) {
             output.print(result);
         });
         user.blur();
-    });
+    }
+
+    check.addEventListener('submit', submit);
 
     user.addEventListener('input', function() {
         output.clear();
     });
+
+    if (location.hash != '') {
+        user.value = location.hash.slice(1);
+        submit();
+    }
 });

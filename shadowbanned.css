@@ -12,7 +12,7 @@ body {
     text-align: center;
 }
 
-#submit {
+input[type="submit"] {
     height: 40px;
     vertical-align: top;
     border-radius: 10px;
