@@ -1,0 +1,32 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background: #fef;
+}
+
+#user {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: x-large;
+    text-align: center;
+}
+
+#submit {
+    height: 40px;
+    vertical-align: top;
+    border-radius: 10px;
+}
+
+.output {
+    background: lightblue;
+    padding: 15px;
+    border-radius: 25px;
+    width: 500px;
+    text-align: center;
+    font-weight: bold;
+    font-size: x-large;
+    margin: auto;
+    margin-top: 20px;
+    box-shadow: 0px 0px 3px 3px gray;
+}
