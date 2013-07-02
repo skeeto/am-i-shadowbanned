@@ -14,3 +14,9 @@ addition to the normal red background.
 This tool can test whether an account is shadowbanned, normal, or
 non-existent. It uses [Any Origin](http://anyorigin.com/) to work
 around the cross-domain issue.
+
+## Inspiration
+
+Outside of a post/comment test in a controlled subreddit, I didn't
+know how to check for a shadowban until
+[StrictScrutiny revealed a nice trick](http://www.reddit.com/r/SubredditDrama/comments/1gvr4g/_/caoacis).
