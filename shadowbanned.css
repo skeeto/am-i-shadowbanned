@@ -30,3 +30,11 @@ input[type="submit"] {
     margin-top: 20px;
     box-shadow: 0px 0px 3px 3px gray;
 }
+
+.warning {
+    font-size: large;
+    font-weight: bold;
+    width: 600px;
+    text-align: justify;
+    margin: 10px auto 15px auto;
+}
