@@ -1,71 +1,67 @@
 /**
- * How does it work? For shadowbanned users /user/[user] returns a 404
- * and /user/[user]/about.json returns a 200. For every other
- * username, both return either 200 (normal) or 404 (doesn't exist or
- * deleted). This checker just uses anyorigin.com to test these two
- * pages.
- * @param {String} user the user to test.
- * @param {Function} callback to receive the result.
+ * How does it work? For both deleted and shadowbanned users
+ * /user/[user]/about.json returns a 404 error but
+ * /api/username_available.json returns false. Non-existent users show
+ * up as available and normal users don't return an error for
+ * about.json.
+ * @param {String} user the user to test
+ * @param {Function} callback to receive the result
  */
 function Checker(user, callback) {
     this.user = user;
     this.callback = callback;
-    this.base = null;
-    this.about = null;
-    var url = 'http://www.reddit.com/user/' + user;
-    this.fetch(url, function(data) {
-        this.base = data.status.http_code;
-        this.check();
-    }.bind(this));
-    this.fetch(url + '/about.json', function(data) {
-        this.about = data.status.http_code;
-        this.check();
-    }.bind(this));
+    var _this = this;
+    this.isVisible(function(visible) {
+        if (visible) {
+            callback(user + ' looks normal');
+        } else {
+            _this.isAvailable(function(available) {
+                if (available) {
+                    callback(user + ' does not exist');
+                } else {
+                    callback(user + ' is shadowbanned or deleted');
+                }
+            });
+        }
+    });
 }
-
 /**
- * Generate a random function name for JSONP.
- * @returns {String} a randomly-generated function name.
- */
-Checker.prototype.generateName = function() {
-    var selection = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    var name = [];
-    for (var i = 0; i < 32; i++) {
-        name.push(selection[~~(Math.random() * selection.length)]);
-    }
-    return name.join('');
-};
-
-/**
- * Fetch a URL using anyorigin.com.
+ * Fetch a URL through a CORS proxy.
  * @param {String} url
- * @param {Function} callback is passed the result.
+ * @param {Function} callback is passed the result
+ * @see http://cors-anywhere.herokuapp.com/
  */
 Checker.prototype.fetch = function(url, callback) {
-    var s = document.createElement('script');
-    var fname = this.generateName();
-    window[fname] = function(data) {
-        delete window[fname];
-        callback(data);
-    };
-    s.src = 'http://anyorigin.com/get?callback=' + fname + '&url=' +
-        encodeURIComponent(url);
-    document.body.appendChild(s);
+    var async = callback != null;
+    var xhr = new XMLHttpRequest();
+    if (async) {
+        xhr.onload = function() {
+            callback(xhr.responseText, xhr);
+        };
+    }
+    xhr.open('GET', 'http://cors-anywhere.herokuapp.com/' + url, async);
+    xhr.send();
+    return async ? xhr : xhr.responseText;
 };
 
 /**
- * Invoke the callback if all of the results have arrived.
+ * @param {Function} callback called with true if user doesn't exist
  */
-Checker.prototype.check = function() {
-    if (this.base != null && this.about != null) {
-        if (this.base == 404 && this.about == 200) {
-            this.callback(this.user + ' is shadowbanned');
-        } else if (this.base == 404 && this.about == 404) {
-            this.callback(this.user + ' does not exist');
-        } else {
-            this.callback(this.user + ' looks normal');
-        }
-    }
+Checker.prototype.isAvailable = function(callback) {
+    var api = "http://www.reddit.com/api/username_available.json?user=";
+    this.fetch(api + this.user, function(result) {
+        callback(JSON.parse(result));
+    });
+};
+
+/**
+ * @param {Function} callback called with true if user is visible
+ */
+Checker.prototype.isVisible = function(callback) {
+    var about = 'http://www.reddit.com/user/' + this.user + '/about.json';
+    this.fetch(about, function(result) {
+        callback(JSON.parse(result).error == null);
+    });
 };
 
 function Output(node) {
