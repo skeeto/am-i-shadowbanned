@@ -1,7 +1,5 @@
 # Reddit shadowban test tool
 
-**This tool no longer works as of [January 29th, 2014](http://redd.it/1wh6jn).**
-
 Test yourself: http://skeeto.github.io/am-i-shadowbanned/
 
 ## What's a shadowban?
