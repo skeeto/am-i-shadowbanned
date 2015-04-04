@@ -73,7 +73,7 @@ Output.prototype.clear = function() {
 };
 
 Output.prototype.print = function(html) {
-    this.node.innerHTML = html;
+    this.node.textContent = html;
 };
 
 window.addEventListener('load', function() {
