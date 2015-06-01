@@ -87,6 +87,7 @@ window.addEventListener('load', function() {
         output.print('Checking ' +  user.value + ' ...');
         new Checker(user.value, function(result) {
             output.print(result);
+            document.getElementById('sister').className = '';
         });
         user.blur();
     }
