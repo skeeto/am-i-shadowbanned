@@ -4,6 +4,10 @@ body {
     background: #fef;
 }
 
+h1>a{
+	text-decoration: none;
+}
+
 #user {
     border: 1px solid black;
     border-radius: 10px;
@@ -29,4 +33,18 @@ input[type="submit"] {
     margin: auto;
     margin-top: 20px;
     box-shadow: 0px 0px 3px 3px gray;
+}
+
+
+@media only screen and (max-width: 630px) {
+	.output{
+		max-width:350px;
+        margin: auto;
+	}
+	#user{
+		margin-bottom: 1em;
+	}
+	h1{
+		margin-top: 2em;
+	}	
 }
