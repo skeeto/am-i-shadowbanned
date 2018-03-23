@@ -39,7 +39,7 @@ Checker.prototype.fetch = function(url, callback) {
             callback(xhr.responseText, xhr);
         };
     }
-    xhr.open('GET', 'http://cors-anywhere.herokuapp.com/' + url, async);
+    xhr.open('GET', 'https://cors-anywhere.herokuapp.com/' + url, async);
     xhr.send();
     return async ? xhr : xhr.responseText;
 };
