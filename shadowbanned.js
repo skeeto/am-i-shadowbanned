@@ -29,7 +29,7 @@ function Checker(user, callback) {
  * Fetch a URL through a CORS proxy.
  * @param {String} url
  * @param {Function} callback is passed the result
- * @see http://cors-anywhere.herokuapp.com/
+ * @see https://cors-anywhere.herokuapp.com/
  */
 Checker.prototype.fetch = function(url, callback) {
     var async = callback != null;
@@ -48,7 +48,7 @@ Checker.prototype.fetch = function(url, callback) {
  * @param {Function} callback called with true if user doesn't exist
  */
 Checker.prototype.isAvailable = function(callback) {
-    var api = "http://www.reddit.com/api/username_available.json?user=";
+    var api = "https://www.reddit.com/api/username_available.json?user=";
     this.fetch(api + this.user, function(result) {
         callback(JSON.parse(result));
     });
@@ -58,7 +58,7 @@ Checker.prototype.isAvailable = function(callback) {
  * @param {Function} callback called with true if user is visible
  */
 Checker.prototype.isVisible = function(callback) {
-    var about = 'http://www.reddit.com/user/' + this.user + '/about.json';
+    var about = 'https://www.reddit.com/user/' + this.user + '/about.json';
     this.fetch(about, function(result) {
         callback(JSON.parse(result).error == null);
     });

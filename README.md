@@ -1,6 +1,6 @@
 # Reddit shadowban test tool
 
-Test yourself: http://skeeto.github.io/am-i-shadowbanned/
+Test yourself: https://skeeto.github.io/am-i-shadowbanned/
 
 ## What's a shadowban?
 
@@ -15,4 +15,4 @@ This tool can test whether an account is shadowbanned, normal, or
 non-existent. It uses [CORS Anywhere][cors] to work around the
 cross-domain issue.
 
-[cors]: http://cors-anywhere.herokuapp.com/
+[cors]: https://cors-anywhere.herokuapp.com/
