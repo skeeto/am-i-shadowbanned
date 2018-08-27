@@ -1,7 +1,11 @@
 body {
     font-family: sans-serif;
     text-align: center;
-    background: #fef;
+    background: #FFE1E1;
+}
+
+h1{
+    text-decoration:none;
 }
 
 h1>a{
@@ -14,16 +18,19 @@ h1>a{
     padding: 5px;
     font-size: x-large;
     text-align: center;
+    outline:none;
 }
 
 input[type="submit"] {
     height: 40px;
     vertical-align: top;
     border-radius: 10px;
+    outline: none;
 }
 
 .output {
-    background: lightblue;
+    background: #FDEEC7;
+    color: #1C8DB9;
     padding: 15px;
     border-radius: 25px;
     width: 650px;
@@ -32,7 +39,7 @@ input[type="submit"] {
     font-size: x-large;
     margin: auto;
     margin-top: 20px;
-    box-shadow: 0px 0px 3px 3px gray;
+    box-shadow: none;
 }
 
 
